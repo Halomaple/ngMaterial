@@ -1,0 +1,183 @@
+body {
+	background: url(../images/seafish.jpg) no-repeat bottom left;
+	background-size: cover;
+}
+
+header nav.navbar-static-top {
+	border-color: rgba(100, 100, 100, .8);
+	box-shadow: 0 1px 1px 3px 8px #555;
+	background-color: rgba(100, 100, 100, .6);
+
+	.navbar-brand,
+	.navbar-nav>li>a,
+	.dropdown-menu a,
+	.navbar-nav .open .dropdown-menu>li>a {
+		color: white;
+		border-bottom: 1px solid transparent;
+	}
+
+	.dropdown-menu {
+		border-color: rgba(100, 100, 100, .8);
+		box-shadow: 0 1px 1px 3px 8px #555;
+		background-color: rgba(100, 100, 100, .6);
+	}
+
+	.navbar-brand:hover,
+	.navbar-nav>li>a:hover,
+	.navbar-nav .open .dropdown-menu>li>a:hover {
+		color: white;
+		text-shadow: 2px 2px 3px black;
+		border-bottom-color: #fff;
+	}
+
+	.dropdown-toggle,
+	.navbar-nav>.open>a,
+	.navbar-nav>.open>a:focus,
+	.navbar-nav>.open>a:active {
+		color: white;
+	}
+
+}
+
+/*About*/
+.about-info {
+	color: #ddd;
+}
+
+/*Login*/
+.login {
+	.login-title {
+		color: #fff;
+		text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.8);
+	}
+
+	.password-error {
+		min-height: 20px;
+	}
+
+}
+
+/*Register*/
+.register-form {
+	md-content md-input-container input.md-input[disabled] {
+		border-bottom-color: rgba(100, 100, 100, 1);
+	}
+
+}
+
+/*Login & Register form*/
+.login-form,
+.register-form {
+	md-content {
+		background: rgba(180, 180, 180, .5);
+		padding-top: 2em;
+
+		md-input-container {
+			margin: 0;
+			padding-top: 18px;
+			padding-bottom: 0;
+			color: white;
+
+			&.md-input-invalid label {
+				color: orange;
+			}
+
+			&.md-input-focused label,
+			&:not(.md-input-invalid).md-input-has-value label,
+			&:not(.md-input-invalid).md-input-focused label,& label.md-required:after {
+				color: inherit;
+			}
+
+			& input {
+				border-color: white;
+			}
+
+			&:not(md-input-invalid).md-input-focused .md-input {
+				border-color: white;
+			}
+
+		}
+
+	}
+
+}
+
+/*Form input*/
+md-content md-input-container {
+	input.md-input {
+		color: inherit;
+	}
+
+	&.md-input-invalid .md-input {
+		border-color: orange;
+	}
+
+	&.md-input-invalid .md-input-message-animation {
+		color: orange;
+		text-shadow: 1px 1px 3px #333;
+	}
+
+	.input-error-message {
+		font-size: 12px;
+		line-height: 14px;
+		color: orange;
+		text-shadow: 1px 1px 3px #333;
+		padding: 5px 5px 0 0;
+	}
+
+	label,
+	&:not(.md-input-focused):not(.md-input-invalid) label.md-required:after {
+		color: inherit;
+	}
+
+}
+
+.form-action-button {
+	width: 100%;
+	margin: 0;
+
+	&.md-button.md-primary.md-raised[disabled] {
+		background-color: rgba(200, 200, 10, .9)
+	}
+
+	&.md-button.md-primary.md-raised {
+		background-color: rgba(10, 180, 10, .9);
+	}
+
+	&.md-button.md-primary.md-raised:not([disabled]):hover {
+		background-color: rgba(10, 200, 10, .9);
+	}
+
+}
+
+.md-button.md-primary.md-fab.fab-action {
+	background-color: rgba(10, 180, 10, .9);
+}
+
+.md-button.md-primary.md-fab.fab-action[disabled] {
+	background-color: rgba(200, 200, 10, .9)
+}
+
+.md-button.md-primary.md-fab.fab-action:not([disabled]):hover {
+	background-color: rgba(10, 200, 10, .9);
+}
+
+/*Helping Classes*/
+.pointer {
+	cursor: pointer;
+}
+
+.align-left {
+	text-align: left;
+}
+
+@media(max-width:500px) {
+	.col-xxs-12 {
+		width: 100%;
+	}
+
+	.col-xxs-12-offset-0 {
+		margin-left: 0;
+	}
+
+}

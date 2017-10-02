@@ -1,0 +1,51 @@
+<div class="container login">
+	<div class="row">
+		<div class="col-xxs-12 col-xs-6 col-sm-6 col-md-8 login-title">
+			<br />
+			<h1>Login</h1>
+			<br />
+			<h4>Login to find more</h4>
+		</div>
+		<div class="col-xxs-12 col-xs-6 col-sm-6 col-md-4" layout="column" ng-cloak>
+			<form class="login-form" name="loginForm" ng-submit="vm.login();">
+				<md-content layout-padding>
+					<div layout="row">
+						<md-input-container flex="100">
+							<label>Email</label>
+							<input ng-model="vm.email" name="email" type="email" ng-pattern="/^.+@.+\..+$/" ng-blur="vm.checkLegalEmail() || loginForm.email.$valid && vm.checkEmail()" ng-change="vm.resetCheck()" required>
+							<div ng-messages="loginForm.email.$error" role="alert" class="error-message">
+								<div ng-message-exp="['required', 'pattern']">
+									Your must enter a valid email address.
+								</div>
+								<div ng-if="vm.hasEnterEmail && vm.emailNotExist">
+									Email not exists, please check.
+								</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout="row">
+						<md-input-container flex="100">
+							<label>Password</label>
+							<input ng-model="vm.password" name="password" type="password" required>
+						</md-input-container>
+					</div>
+					<div layout="row">
+						<md-input-container flex="100">
+							<div class="remember-user" ng-hide="true">
+								<md-checkbox ng-model="vm.rememberMe" aria-label="Remember Me">
+									Remember me
+								</md-checkbox>
+							</div>
+							<div class="input-error-message password-error">
+								<span ng-show="vm.errorMsg.length > 0"> {{vm.errorMsg}} </span>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout="row login-buttons">
+						<md-button ng-click="vm.login()" ng-disabled="!loginForm.$valid || vm.emailNotExist" class="md-raised md-primary form-action-button">Login</md-button>
+					</div>
+				</md-content>
+			</form>
+		</div>
+	</div>
+</div>

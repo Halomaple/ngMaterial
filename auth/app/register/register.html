@@ -1,0 +1,70 @@
+<div class="container register">
+	<div class="row">
+		<div class="col-xxs-12 col-xxs-12-offset-0 col-xs-8 col-xs-offset-2 col-md-4 col-md-offset-4 clearfix" layout="column" ng-cloak>
+			<form class="register-form" name="registerForm" ng-submit="vm.registerUser()">
+				<md-content layout-padding>
+					<div layout="row">
+						<md-input-container flex="100">
+							<label>Name</label>
+							<input required name="name" ng-model="vm.name" minlength="2" maxlength="20" ng-blur="registerForm.name.$valid && vm.checkName()" ng-change="vm.resetCheckStatus()">
+							<div ng-messages="registerForm.name.$error">
+								<div ng-message="required">Name is required.</div>
+								<div ng-message-exp="['minlength', 'maxlength']">
+									Your name must be between 2 and 20 characters long.
+								</div>
+								<div ng-if="vm.nameInvalid">
+									Name existed, please input another name.
+								</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout="row">
+						<md-input-container flex="100">
+							<label>Email</label>
+							<input required type="email" name="email" ng-model="vm.email"
+							minlength="7" maxlength="50" ng-pattern="/^.+@.+\..+$/" ng-blur="registerForm.email.$valid && vm.checkEmail()" ng-change="vm.resetCheckStatus()"/>
+							<div ng-messages="registerForm.email.$error" role="alert">
+								<div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+									Your email must be between 7 and 50 characters long and look like an e-mail address.
+								</div>
+								<div ng-if="vm.emailInvalid">
+									Email existed, please input another email.
+								</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout="row">
+						<md-input-container flex="100">
+							<label>Password</label>
+							<input required type="password" name="password" ng-model="vm.password"
+							minlength="6" maxlength="20"/>
+							<div ng-messages="registerForm.password.$error" role="alert">
+								<div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+									Your password must be between 6 and 20 characters long to ensure safety.
+								</div>
+								<div></div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout="row">
+						<md-input-container flex="100">
+							<label>Password confirm</label>
+							<input required type="password" name="repassword" ng-model="vm.repassword" ng-disabled="!registerForm.password.$valid"/>
+							<div ng-messages="registerForm.repassword.$error" role="alert">
+								<div ng-message-exp="['required']" ng-if="registerForm.password.$valid">
+									Your need to confirm you password.
+								</div>
+								<div ng-if="registerForm.password.$valid && registerForm.repassword.$valid && !vm.confirmingPassword()" class="input-error-message">
+									Password not identical, please input again.
+								</div>
+							</div>
+						</md-input-container>
+					</div>
+					<div layout="row">
+						<md-button type="submit" class="md-raised md-primary form-action-button" ng-disabled="!registerForm.$valid || vm.nameInvalid || vm.emailInvalid || !vm.passwordIdentical()" >Register</md-button>
+					</div>
+				</md-content>
+			</form>
+		</div>
+	</div>
+</div>

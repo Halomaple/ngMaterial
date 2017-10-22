@@ -39,7 +39,7 @@
 				if (res.data.status == 'success') {
 					loginData.name = res.data.name;
 					UserService.setUserInfo(loginData);
-					$state.go('exchanges');
+					$state.go('loginSuccess');
 				} else if (res.data.status == 'failed') {
 					vm.errorMsg = "Password incorrect, please try again.";
 				}

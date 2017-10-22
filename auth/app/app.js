@@ -15,6 +15,10 @@ app.config(function($stateProvider, $urlRouterProvider) {
 			url: '/about',
 			templateUrl: 'about/about.html',
 		}).state({
+			name: 'loginSuccess',
+			url: '/loginSuccess',
+			templateUrl: 'login/loginSuccess.html',
+		}).state({
 			name: 'login',
 			url: '/login',
 			templateUrl: 'login/login.html',

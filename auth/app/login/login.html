@@ -26,7 +26,7 @@
 					<div layout="row">
 						<md-input-container flex="100">
 							<label>Password</label>
-							<input ng-model="vm.password" name="password" type="password" required>
+							<input ng-model="vm.password" name="password" type="password" ng-keydown="$event.keyCode == 13 && vm.login()" required>
 						</md-input-container>
 					</div>
 					<div layout="row">

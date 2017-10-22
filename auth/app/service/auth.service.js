@@ -4,13 +4,15 @@
 	function AuthService($http, $cookies) {
 		var svc = this;
 
-		var loginUrl = 'api/account/LoginAccount';
-		var logoutUrl = 'api/account/LogoutAccount';
-		var checkNameUrl = 'api/account/CheckName';
-		var checkEmailUrl = 'api/account/CheckEmail';
-		var resetPassUrl = 'api/account/ResetPassword';
-		var resetEmailUrl = 'api/account/ResetEmail';
-		var registerUrl = 'api/account/Register';
+		var host_url = 'http://localhost:8200';
+
+		var loginUrl = host_url + '/LoginAccount';
+		var logoutUrl = host_url + '/LogoutAccount';
+		var checkNameUrl = host_url + '/CheckName';
+		var checkEmailUrl = host_url + '/CheckEmail';
+		var resetPassUrl = host_url + '/ResetPassword';
+		var resetEmailUrl = host_url + '/ResetEmail';
+		var registerUrl = host_url + '/Register';
 
 		svc.userLogin = function(loginData) {
 			return $http.post(loginUrl, loginData);

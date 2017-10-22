@@ -125,6 +125,10 @@ md-content md-input-container {
 		padding: 5px 5px 0 0;
 	}
 
+	.error-message {
+		color: orange;
+	}
+
 	label,
 	&:not(.md-input-focused):not(.md-input-invalid) label.md-required:after {
 		color: inherit;

@@ -29,26 +29,22 @@ header nav.navbar-static-top {
 		color: white;
 		text-shadow: 2px 2px 3px black;
 		border-bottom-color: #fff;
+		background: rgba(50, 50, 50, .6);
 	}
 
-	.dropdown-toggle,
 	.navbar-nav>.open>a,
 	.navbar-nav>.open>a:focus,
 	.navbar-nav>.open>a:active {
 		color: white;
+		background: rgba(50, 50, 50, .6);
+		border-bottom-color: #fff;
 	}
 
-}
-
-/*About*/
-.about-info {
-	color: #ddd;
 }
 
 /*Login*/
 .login {
 	.login-title {
-		color: #fff;
 		text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.8);
 	}
 

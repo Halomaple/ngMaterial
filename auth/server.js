@@ -5,6 +5,7 @@ var url = require('url');
 const port = 8200;
 
 var demoAccounts = [{
+	name: 'demo',
 	username: 'demo@demo.com',
 	password: 'demo'
 }];
@@ -65,12 +66,14 @@ function loginAccount(request, response) {
 		var accountMatched = false;
 		demoAccounts.forEach(function(d) {
 			if (d.username == accoutInfo.email && d.password == accoutInfo.password) {
+				accoutInfo.name = d.name;
 				accountMatched = true;
 			}
 		});
 
 		if (accountMatched) {
 			result.status = 'success';
+			result.name = accoutInfo.name;
 			console.error('login success.');
 		} else {
 			result.status = 'failed';

@@ -31,7 +31,7 @@
 		};
 
 		svc.isUserLogin = function() {
-			return svc.userInfo.name() != null && svc.userInfo.email() != null && svc.userInfo.password() != null;
+			return svc.userInfo.name() && svc.userInfo.email() && svc.userInfo.password();
 		};
 	}
 })();

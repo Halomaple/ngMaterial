@@ -19,7 +19,7 @@
 		};
 
 		svc.userLogout = function() {
-			return $http.get(logoutUrl);
+			return $http.get(logoutUrl + '?email=' + $cookies.get('email'));
 		};
 
 		svc.checkName = function(name) {

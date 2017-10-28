@@ -5,10 +5,11 @@ var url = require('url');
 const port = 8200;
 
 var demoAccounts = [{
-	name: 'demo',
-	username: 'demo@demo.com',
-	password: 'demo'
-}];
+		name: 'demo',
+		username: 'demo@demo.com',
+		password: 'demo'
+	}],
+	loginAccounts = [];
 
 http.createServer(function(request, response) {
 	accountProcessor(request, response);
@@ -27,6 +28,10 @@ function accountProcessor(request, response) {
 
 		case '/LoginAccount':
 			loginAccount(request, response);
+			break;
+
+		case '/LogoutAccount':
+			logoutAccount(rawUrl, response);
 			break;
 	}
 }
@@ -74,7 +79,8 @@ function loginAccount(request, response) {
 		if (accountMatched) {
 			result.status = 'success';
 			result.name = accoutInfo.name;
-			console.error('login success.');
+			loginAccounts.push(accoutInfo);
+			console.info('login success.');
 		} else {
 			result.status = 'failed';
 			console.error('login failed.');
@@ -82,6 +88,27 @@ function loginAccount(request, response) {
 
 		responseResult(response, result);
 	});
+}
+
+function logoutAccount(rawUrl, response) {
+	var username = rawUrl.search.split('=')[1],
+		usernameMatched = false,
+		result = {};
+
+	var currentAccountIndex;
+	loginAccounts.forEach(function(a, i) {
+		if (a.email == username)
+			currentAccountIndex = i;
+	});
+
+	if (currentAccountIndex >= 0) {
+		loginAccounts.splice(currentAccountIndex, 1);
+		result.status = 'success';
+	} else {
+		result.status = 'failed';
+	}
+
+	responseResult(response, result);
 }
 
 function responseResult(response, result) {

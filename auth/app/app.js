@@ -19,6 +19,10 @@ app.config(function($stateProvider, $urlRouterProvider) {
 			url: '/loginSuccess',
 			templateUrl: 'login/loginSuccess.html',
 		}).state({
+			name: 'logoutSuccess',
+			url: '/logoutSuccess',
+			templateUrl: 'login/logoutSuccess.html',
+		}).state({
 			name: 'login',
 			url: '/login',
 			templateUrl: 'login/login.html',
@@ -48,12 +52,12 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		};
 
 		vm.userLogout = function() {
+
 			AuthService.userLogout().then(function(res) {
 				if (res.data.status == 'success') {
 					UserService.clearUserInfo();
-					$state.go('exchanges', {}, {
-						reload: true
-					});
+					$state.go('logoutSuccess');
+					UserService.clearUserInfo();
 				}
 			}, function(err) {});
 		};

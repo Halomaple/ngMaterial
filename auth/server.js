@@ -7,7 +7,15 @@ const port = 8200;
 var demoAccounts = [{
 		name: 'demo',
 		username: 'demo@demo.com',
-		password: 'demo'
+		password: 'demodemo'
+	}, {
+		name: 'demo1',
+		username: 'demo1@demo.com',
+		password: 'demodemo'
+	}, {
+		name: 'demo2',
+		username: 'demo2@demo.com',
+		password: 'demodemo'
 	}],
 	loginAccounts = [];
 

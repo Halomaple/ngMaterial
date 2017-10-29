@@ -15,7 +15,7 @@
 		<!-- app css-->
 		<link rel="stylesheet" type="text/css" href="dist/style.css" />
 	</head>
-	<body>
+	<body class="ngAuth">
 		<header ng-controller="HeaderController as vm">
 			<nav class="navbar navbar-default navbar-static-top">
 				<div class="container">
@@ -44,6 +44,12 @@
 										<a href="" ng-click="vm.userLogout()">
 											<i class="fa fa-btn fa-sign-out"></i>
 											Logout
+										</a>
+									</li>
+									<li>
+										<a ui-sref="account">
+											<i class="fa fa-btn fa-sign-out"></i>
+											Account
 										</a>
 									</li>
 								</ul>

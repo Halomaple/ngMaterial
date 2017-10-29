@@ -10,8 +10,7 @@
 		var logoutUrl = host_url + '/LogoutAccount';
 		var checkNameUrl = host_url + '/CheckName';
 		var checkEmailUrl = host_url + '/CheckEmail';
-		var resetPassUrl = host_url + '/ResetPassword';
-		var resetEmailUrl = host_url + '/ResetEmail';
+		var saveProfileUrl = host_url + '/SaveProfile';
 		var registerUrl = host_url + '/Register';
 
 		svc.userLogin = function(loginData) {
@@ -30,12 +29,9 @@
 			return $http.get(checkEmailUrl + '?email=' + email);
 		};
 
-		svc.resetPassword = function(user) {
-			return $http.post(resetPassUrl, user);
-		};
-
-		svc.resetEmail = function(user) {
-			return $http.post(resetEmailUrl, user);
+		svc.saveProfile = function(userInfoData){
+			console.log(userInfoData, 'userInfoData');
+			return $http.post(saveProfileUrl, userInfoData);
 		};
 
 		svc.register = function(user) {

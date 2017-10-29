@@ -11,31 +11,36 @@ var app = angular.module('ngAuth', [
 app.config(function($stateProvider, $urlRouterProvider) {
 	$urlRouterProvider.when('', '/about');
 	$stateProvider.state({
-			name: 'about',
-			url: '/about',
-			templateUrl: 'about/about.html',
-		}).state({
-			name: 'loginSuccess',
-			url: '/loginSuccess',
-			templateUrl: 'login/loginSuccess.html',
-		}).state({
-			name: 'logoutSuccess',
-			url: '/logoutSuccess',
-			templateUrl: 'login/logoutSuccess.html',
-		}).state({
-			name: 'login',
-			url: '/login',
-			templateUrl: 'login/login.html',
-			controller: 'LoginController',
-			controllerAs: 'vm'
-		})
-		.state({
-			name: 'register',
-			url: '/register',
-			templateUrl: 'register/register.html',
-			controller: 'RegisterController',
-			controllerAs: 'vm'
-		});
+		name: 'about',
+		url: '/about',
+		templateUrl: 'about/about.html',
+	}).state({
+		name: 'loginSuccess',
+		url: '/loginSuccess',
+		templateUrl: 'login/loginSuccess.html',
+	}).state({
+		name: 'logoutSuccess',
+		url: '/logoutSuccess',
+		templateUrl: 'login/logoutSuccess.html',
+	}).state({
+		name: 'login',
+		url: '/login',
+		templateUrl: 'login/login.html',
+		controller: 'LoginController',
+		controllerAs: 'vm'
+	}).state({
+		name: 'account',
+		url: '/account',
+		templateUrl: 'account/account.html',
+		controller: 'AccountController',
+		controllerAs: 'vm'
+	}).state({
+		name: 'register',
+		url: '/register',
+		templateUrl: 'register/register.html',
+		controller: 'RegisterController',
+		controllerAs: 'vm'
+	});
 });
 
 (function() {
@@ -52,7 +57,6 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		};
 
 		vm.userLogout = function() {
-
 			AuthService.userLogout().then(function(res) {
 				if (res.data.status == 'success') {
 					UserService.clearUserInfo();

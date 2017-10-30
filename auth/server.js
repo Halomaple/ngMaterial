@@ -68,25 +68,24 @@ function loginAccount(request, response) {
 
 	request.on('end', function() {
 		var accoutInfo = JSON.parse(bodyStr);
-		var accountMatched = false;
-		demoAccounts.forEach(function(d) {
-			if (d.email == accoutInfo.email && d.password == accoutInfo.password) {
-				accoutInfo.name = d.name;
-				accountMatched = true;
+		var accountsLength = demoAccounts.length;
+
+		for (var i = 0; i < accountsLength; i++) {
+			if (demoAccounts[i].email == accoutInfo.email && demoAccounts[i].password == accoutInfo.password) {
+				result.status = 'success';
+				result.name = demoAccounts[i].name;
+				loginAccounts.push(demoAccounts[i]);
+				console.info('login success.', result);
+
+				responseResult(response, result);
+				break;
+			} else {
+				result.status = 'failed';
+				console.error('login failed.');
+				responseResult(response, result);
+				break;
 			}
-		});
-
-		if (accountMatched) {
-			result.status = 'success';
-			result.name = accoutInfo.name;
-			loginAccounts.push(accoutInfo);
-			console.info('login success.');
-		} else {
-			result.status = 'failed';
-			console.error('login failed.');
 		}
-
-		responseResult(response, result);
 	});
 }
 
@@ -121,28 +120,24 @@ function saveProfile(request, response) {
 
 	request.on('end', function() {
 		var accoutInfo = JSON.parse(bodyStr);
-		var accountMatched = false;
-		var matchedIndex = 0;
+		var accountsLength = demoAccounts.length;
 
-		demoAccounts.forEach(function(d, i) {
-			if (d.email == accoutInfo.preEmail) {
-				matchedIndex = i;
-				accountMatched = true;
+		for (var i = 0; i < accountsLength; i++) {
+			if (demoAccounts[i].email == accoutInfo.preEmail) {
+				delete accoutInfo.preEmail;
+				demoAccounts.splice(i, 1, accoutInfo);
+				fs.writeFileSync(demoAccountsFilePath, JSON.stringify({
+					'accounts': demoAccounts
+				}), 'utf8');
+				result.status = 'success';
+				responseResult(response, result);
+				break;
+			} else {
+				result.status = 'failed';
+				responseResult(response, result);
+				break;
 			}
-		});
-
-		if (accountMatched) {
-			delete accoutInfo.preEmail;
-			demoAccounts.splice(matchedIndex, 1, accoutInfo);
-			result.status = 'success';
-			fs.writeFileSync(demoAccountsFilePath, JSON.stringify({
-				'accounts': demoAccounts
-			}), 'utf8');
-		} else {
-			result.status = 'failed';
 		}
-
-		responseResult(response, result);
 	});
 }
 

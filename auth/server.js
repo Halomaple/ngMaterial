@@ -2,22 +2,10 @@ var http = require('http');
 var fs = require('fs');
 var url = require('url');
 
-const port = 8200;
-
-var demoAccounts = [{
-		name: 'demo',
-		username: 'demo@demo.com',
-		password: 'demodemo'
-	}, {
-		name: 'demo1',
-		username: 'demo1@demo.com',
-		password: 'demodemo'
-	}, {
-		name: 'demo2',
-		username: 'demo2@demo.com',
-		password: 'demodemo'
-	}],
-	loginAccounts = [];
+var port = 8200;
+var demoAccountsFilePath = './demoAccounts.json';
+var demoAccounts = JSON.parse(fs.readFileSync(demoAccountsFilePath, 'utf8')).accounts;
+var loginAccounts = [];
 
 http.createServer(function(request, response) {
 	accountProcessor(request, response);
@@ -41,26 +29,30 @@ function accountProcessor(request, response) {
 		case '/LogoutAccount':
 			logoutAccount(rawUrl, response);
 			break;
+
+		case '/SaveProfile':
+			saveProfile(request, response);
+			break;
 	}
 }
 
 function checkEmailExistence(rawUrl, response) {
-	var username = rawUrl.search.split('=')[1],
-		usernameMatched = false,
+	var email = rawUrl.search.split('=')[1],
+		emailMatched = false,
 		result = {};
 
 	demoAccounts.forEach(function(d) {
-		if (d.username == username) {
-			usernameMatched = true;
+		if (d.email == email) {
+			emailMatched = true;
 		}
 	});
 
-	if (usernameMatched) {
+	if (emailMatched) {
 		result.status = 'success';
-		console.error('Username ' + username + ' matched.');
+		console.error('Username ' + email + ' matched.');
 	} else {
 		result.status = 'failed';
-		console.info('Username ' + username + ' does not exist.');
+		console.info('Username ' + email + ' does not exist.');
 	}
 
 	responseResult(response, result);
@@ -78,7 +70,7 @@ function loginAccount(request, response) {
 		var accoutInfo = JSON.parse(bodyStr);
 		var accountMatched = false;
 		demoAccounts.forEach(function(d) {
-			if (d.username == accoutInfo.email && d.password == accoutInfo.password) {
+			if (d.email == accoutInfo.email && d.password == accoutInfo.password) {
 				accoutInfo.name = d.name;
 				accountMatched = true;
 			}
@@ -99,13 +91,13 @@ function loginAccount(request, response) {
 }
 
 function logoutAccount(rawUrl, response) {
-	var username = rawUrl.search.split('=')[1],
-		usernameMatched = false,
+	var email = rawUrl.search.split('=')[1],
+		emailMatched = false,
 		result = {};
 
 	var currentAccountIndex;
 	loginAccounts.forEach(function(a, i) {
-		if (a.email == username)
+		if (a.email == email)
 			currentAccountIndex = i;
 	});
 
@@ -117,6 +109,41 @@ function logoutAccount(rawUrl, response) {
 	}
 
 	responseResult(response, result);
+}
+
+function saveProfile(request, response) {
+	var bodyStr = '',
+		result = {};
+
+	request.on('data', function(chunk) {
+		bodyStr += chunk.toString();
+	});
+
+	request.on('end', function() {
+		var accoutInfo = JSON.parse(bodyStr);
+		var accountMatched = false;
+		var matchedIndex = 0;
+
+		demoAccounts.forEach(function(d, i) {
+			if (d.email == accoutInfo.preEmail) {
+				matchedIndex = i;
+				accountMatched = true;
+			}
+		});
+
+		if (accountMatched) {
+			delete accoutInfo.preEmail;
+			demoAccounts.splice(matchedIndex, 1, accoutInfo);
+			result.status = 'success';
+			fs.writeFileSync(demoAccountsFilePath, JSON.stringify({
+				'accounts': demoAccounts
+			}), 'utf8');
+		} else {
+			result.status = 'failed';
+		}
+
+		responseResult(response, result);
+	});
 }
 
 function responseResult(response, result) {

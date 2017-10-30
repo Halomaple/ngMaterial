@@ -30,7 +30,6 @@
 		};
 
 		svc.saveProfile = function(userInfoData){
-			console.log(userInfoData, 'userInfoData');
 			return $http.post(saveProfileUrl, userInfoData);
 		};
 

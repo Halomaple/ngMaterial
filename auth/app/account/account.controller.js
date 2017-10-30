@@ -42,10 +42,10 @@
 				email: vm.email,
 				password: vm.password
 			};
-
 			authService.saveProfile(userInfo).then(function(res) {
 				if (res.data.status == 'success') {
 					userService.setUserInfo(userInfo);
+					vm.preEmail = userService.userInfo.email();
 					vm.profileModified = false;
 				}
 			});

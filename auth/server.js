@@ -4,8 +4,9 @@ var url = require('url');
 
 var port = 8200;
 var demoAccountsFilePath = './demoAccounts.json';
+var loginAccountsFilePath = './loginAccounts.json';
 var demoAccounts = JSON.parse(fs.readFileSync(demoAccountsFilePath, 'utf8')).accounts;
-var loginAccounts = [];
+var loginAccounts = JSON.parse(fs.readFileSync(loginAccountsFilePath, 'utf8')).accounts;
 
 http.createServer(function(request, response) {
 	accountProcessor(request, response);
@@ -74,7 +75,12 @@ function loginAccount(request, response) {
 			if (demoAccounts[i].email == accoutInfo.email && demoAccounts[i].password == accoutInfo.password) {
 				result.status = 'success';
 				result.name = demoAccounts[i].name;
+
 				loginAccounts.push(demoAccounts[i]);
+				fs.writeFileSync(loginAccountsFilePath, JSON.stringify({
+					'accounts': loginAccounts
+				}), 'utf8', '\t');
+
 				console.info('login success.', result);
 
 				responseResult(response, result);
@@ -102,6 +108,10 @@ function logoutAccount(rawUrl, response) {
 
 	if (currentAccountIndex >= 0) {
 		loginAccounts.splice(currentAccountIndex, 1);
+		fs.writeFileSync(loginAccountsFilePath, JSON.stringify({
+			'accounts': loginAccounts
+		}), 'utf8', '\t');
+
 		result.status = 'success';
 	} else {
 		result.status = 'failed';
@@ -128,7 +138,7 @@ function saveProfile(request, response) {
 				demoAccounts.splice(i, 1, accoutInfo);
 				fs.writeFileSync(demoAccountsFilePath, JSON.stringify({
 					'accounts': demoAccounts
-				}), 'utf8');
+				}), 'utf8', '\t');
 				result.status = 'success';
 				responseResult(response, result);
 				break;

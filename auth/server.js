@@ -72,29 +72,31 @@ function loginAccount(request, response) {
 	});
 
 	request.on('end', function() {
-		var accoutInfo = JSON.parse(bodyStr);
-		var accountsLength = demoAccounts.length;
+		var accoutInfo = JSON.parse(bodyStr),
+			accountsLength = demoAccounts.length,
+			matchedIndex = -1;
 
-		for (var i = 0; i < accountsLength; i++) {
-			if (demoAccounts[i].email == accoutInfo.email && demoAccounts[i].password == accoutInfo.password) {
-				result.status = 'success';
-				result.name = demoAccounts[i].name;
-
-				loginAccounts.push(demoAccounts[i]);
-				fs.writeFileSync(loginAccountsFilePath, JSON.stringify({
-					'accounts': loginAccounts
-				}, null, '\t'), 'utf8');
-
-				console.info('login success.', result);
-
-				responseResult(response, result);
-				break;
-			} else {
-				result.status = 'failed';
-				console.error('login failed.');
-				responseResult(response, result);
-				break;
+		demoAccounts.forEach(function(d, i) {
+			if (d.email == accoutInfo.email && d.password == accoutInfo.password) {
+				matchedIndex = i;
 			}
+		});
+
+		if (matchedIndex >= 0) {
+			result.status = 'success';
+			result.name = demoAccounts[matchedIndex].name;
+
+			loginAccounts.push(demoAccounts[matchedIndex]);
+			fs.writeFileSync(loginAccountsFilePath, JSON.stringify({
+				'accounts': loginAccounts
+			}, null, '\t'), 'utf8');
+
+			console.info('login success.', result);
+			responseResult(response, result);
+		} else {
+			result.status = 'failed';
+			console.error('login failed.');
+			responseResult(response, result);
 		}
 	});
 }

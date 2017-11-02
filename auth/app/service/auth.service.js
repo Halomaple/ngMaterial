@@ -33,8 +33,8 @@
 			return $http.post(saveProfileUrl, userInfoData);
 		};
 
-		svc.register = function(user) {
-			return $http.post(registerUrl, user);
+		svc.register = function(userInfo) {
+			return $http.post(registerUrl, userInfo);
 		};
 	}
 })();

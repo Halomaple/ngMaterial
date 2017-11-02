@@ -1,1 +1,19 @@
-{"accounts":[{"name":"demo","email":"demo@demo.com","password":"demodemo"},{"name":"demo1","email":"demo1@demo.com","password":"demodemo"},{"name":"demo2","email":"demo2@demo.com","password":"demodemo"}]}
+{
+	"accounts": [
+		{
+			"name": "demo",
+			"email": "demo@demo.com",
+			"password": "demodemo"
+		},
+		{
+			"name": "demo1",
+			"email": "demo1@demo.com",
+			"password": "demodemo"
+		},
+		{
+			"name": "demo2",
+			"email": "demo2@demo.com",
+			"password": "demodemo"
+		}
+	]
+}

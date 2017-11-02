@@ -4,25 +4,16 @@
 
 	function RegisterController($state, AuthService, UserService) {
 		var vm = this;
-		vm.nameInvalid = false;
 		vm.emailInvalid = false;
-
-		vm.checkName = function() {
-			AuthService.checkName(vm.name).then(function(res) {
-				if (res.data.status == 'success')
-					vm.nameInvalid = true;
-			}, function() {});
-		};
 
 		vm.checkEmail = function() {
 			AuthService.checkEmail(vm.email).then(function(res) {
 				if (res.data.status == 'success')
 					vm.emailInvalid = true;
-			}, function() {});
+			});
 		};
 
 		vm.resetCheckStatus = function() {
-			vm.nameInvalid = false;
 			vm.emailInvalid = false;
 		};
 
@@ -43,12 +34,10 @@
 
 			AuthService.register(user).then(function(res) {
 				if (res.data.status == 'success') {
-					UserService.setUserInfo(user);
-					$state.go('exchanges');
-				} else {
-
+					alert('Registered!');
+					$state.go('login');
 				}
-			}, function() {});
+			});
 		};
 	}
 })();

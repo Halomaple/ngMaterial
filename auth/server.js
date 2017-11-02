@@ -155,8 +155,22 @@ function saveProfile(request, response) {
 	});
 }
 
-function register(request, response){
+function register(request, response) {
+	var bodyStr = '',
+		result = {};
 
+	request.on('data', function(chunk) {
+		bodyStr += chunk.toString();
+	});
+
+	request.on('end', function() {
+		demoAccounts.push(JSON.parse(bodyStr));
+		fs.writeFileSync(demoAccountsFilePath, JSON.stringify({
+			'accounts': demoAccounts
+		}, null, '\t'), 'utf8');
+		result.status = 'success';
+		responseResult(response, result);
+	});
 }
 
 function responseResult(response, result) {

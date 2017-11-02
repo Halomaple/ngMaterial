@@ -13,9 +13,6 @@
 								<div ng-message-exp="['minlength', 'maxlength']">
 									Your name length must be between 2 and 20 characters.
 								</div>
-								<div ng-if="vm.nameInvalid">
-									Name existed, please input another name.
-								</div>
 							</div>
 						</md-input-container>
 					</div>
@@ -42,7 +39,6 @@
 								<div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
 									Your password must be between 6 and 20 characters long to ensure safety.
 								</div>
-								<div></div>
 							</div>
 						</md-input-container>
 					</div>

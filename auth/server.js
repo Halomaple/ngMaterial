@@ -34,6 +34,10 @@ function accountProcessor(request, response) {
 		case '/SaveProfile':
 			saveProfile(request, response);
 			break;
+
+		case '/Register':
+			register(request, response);
+			break;
 	}
 }
 
@@ -79,7 +83,7 @@ function loginAccount(request, response) {
 				loginAccounts.push(demoAccounts[i]);
 				fs.writeFileSync(loginAccountsFilePath, JSON.stringify({
 					'accounts': loginAccounts
-				}), 'utf8', '\t');
+				}, null, '\t'), 'utf8');
 
 				console.info('login success.', result);
 
@@ -110,7 +114,7 @@ function logoutAccount(rawUrl, response) {
 		loginAccounts.splice(currentAccountIndex, 1);
 		fs.writeFileSync(loginAccountsFilePath, JSON.stringify({
 			'accounts': loginAccounts
-		}), 'utf8', '\t');
+		}, null, '\t'), 'utf8');
 
 		result.status = 'success';
 	} else {
@@ -138,7 +142,7 @@ function saveProfile(request, response) {
 				demoAccounts.splice(i, 1, accoutInfo);
 				fs.writeFileSync(demoAccountsFilePath, JSON.stringify({
 					'accounts': demoAccounts
-				}), 'utf8', '\t');
+				}, null, '\t'), 'utf8');
 				result.status = 'success';
 				responseResult(response, result);
 				break;
@@ -149,6 +153,10 @@ function saveProfile(request, response) {
 			}
 		}
 	});
+}
+
+function register(request, response){
+
 }
 
 function responseResult(response, result) {

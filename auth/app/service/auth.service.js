@@ -12,6 +12,7 @@
 		var checkEmailUrl = host_url + '/CheckEmail';
 		var saveProfileUrl = host_url + '/SaveProfile';
 		var registerUrl = host_url + '/Register';
+		var getDemoAccountsUrl = host_url + '/GetDemoAccounts';
 
 		svc.userLogin = function(loginData) {
 			return $http.post(loginUrl, loginData);
@@ -35,6 +36,10 @@
 
 		svc.register = function(userInfo) {
 			return $http.post(registerUrl, userInfo);
+		};
+
+		svc.getDemoAccounts = function(){
+			return $http.get(getDemoAccountsUrl);
 		};
 	}
 })();

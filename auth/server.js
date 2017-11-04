@@ -38,6 +38,12 @@ function accountProcessor(request, response) {
 		case '/Register':
 			register(request, response);
 			break;
+
+		case '/GetDemoAccounts':
+			responseResult(response, {
+				accounts: demoAccounts
+			});
+			break;
 	}
 }
 

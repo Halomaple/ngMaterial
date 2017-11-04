@@ -5,6 +5,12 @@
 			<h1>Login</h1>
 			<br />
 			<h4>Login to find more</h4>
+			<div>
+				Demo Accounts: 
+				<p ng-repeat="a in vm.demoAccounts">
+					<span style="color: grey">email:</span> {{a.email}}, <span style="color: grey">password:</span> {{a.password}}
+				</p>
+			</div>
 		</div>
 		<div class="col-xxs-12 col-xs-6 col-sm-6 col-md-4" layout="column" ng-cloak>
 			<form class="login-form" name="loginForm" ng-submit="vm.login();">

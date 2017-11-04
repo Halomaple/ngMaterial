@@ -17,8 +17,6 @@
 				if (res.data.status == 'failed') {
 					vm.emailNotExist = true;
 				}
-			}, function() {
-
 			});
 		};
 
@@ -43,7 +41,11 @@
 				} else if (res.data.status == 'failed') {
 					vm.errorMsg = "Password incorrect, please try again.";
 				}
-			}, function() {});
+			});
 		};
+
+		AuthService.getDemoAccounts().then(function(data) {
+			vm.demoAccounts = data.data.accounts;
+		});
 	}
 })();
